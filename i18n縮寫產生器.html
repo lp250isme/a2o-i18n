@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>i18n 縮寫產生器</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 20px;
+                background-color: #f9f9f9;
+            }
+            h1 {
+                color: #333;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            textarea {
+                width: 100%;
+                height: 100px;
+                margin-bottom: 20px;
+                padding: 10px;
+                font-size: 16px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+            #output {
+                padding: 10px;
+                background: #f4f4f4;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                min-height: 50px;
+                font-size: 16px;
+            }
+            p {
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>i18n 縮寫產生器</h1>
+            <p>歡迎使用 i18n 縮寫產生器！</p>
+            <p>
+                <strong>i18n</strong> 是
+                <strong>Internationalization（國際化）</strong> 的縮寫， 因為
+                "Internationalization" 這個單字中間有 18 個字母，故簡寫為 i18n。
+            </p>
+            <p>
+                這個工具會將您輸入的句子中的每個單字，轉換成 i18n
+                的縮寫形式，讓你完全看不懂。
+            </p>
+
+            <textarea id="input" placeholder="在此輸入任意句子..."></textarea>
+            <div id="output">轉換結果將顯示在這裡。</div>
+        </div>
+
+        <script>
+            function toI18nFormat(word) {
+                if (!word || word.length <= 2) {
+                    return word // 不處理兩個字母以下的單字
+                }
+                const firstLetter = word[0]
+                const lastLetter = word[word.length - 1]
+                const middleLength = word.length - 2
+
+                return `${firstLetter}${middleLength}${lastLetter}`
+            }
+
+            // 保留空格並處理標點符號的轉換函數
+            function convertSentenceToI18n(sentence) {
+                if (!sentence) {
+                    return sentence // 如果句子為空，直接返回
+                }
+
+                return sentence.replace(/(\b\w+\b)/g, match =>
+                    toI18nFormat(match)
+                )
+            }
+
+            // 監聽輸入框的變化，實時更新輸出
+            const input = document.getElementById('input')
+            const output = document.getElementById('output')
+
+            input.addEventListener('input', () => {
+                const result = convertSentenceToI18n(input.value)
+                output.textContent = result
+            })
+        </script>
+    </body>
+</html>
