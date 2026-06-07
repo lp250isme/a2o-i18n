@@ -2,7 +2,7 @@
 
 [English](#english) | [繁體中文](#繁體中文)
 
-🔗 **Live Demo**: [a2o-i18n.vercel.app](https://a2o-i18n.vercel.app)
+🔗 **Live Demo**: [a2o.kvcc.me](https://a2o.kvcc.me)
 
 ---
 
@@ -27,8 +27,8 @@ A tiny toy that compresses every word into its numeronym — `first letter + mid
 
 ### 🔗 More by kv
 
-- [GTC — Maps Coordinate Converter](https://gotoc.vercel.app/) · [repo](https://github.com/lp250isme/maps-coords-api)
-- [Indigo — Playlist Cover Maker](https://playlist-cover-maker.vercel.app/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
+- [GTC — Maps Coordinate Converter](https://gtc.kvcc.me/) · [repo](https://github.com/lp250isme/maps-coords-api)
+- [Indigo — Playlist Cover Maker](https://indigo.kvcc.me/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
 
 ### 🙏 Credit
 
@@ -57,8 +57,8 @@ Inspired by [RimoChan/i7h](https://github.com/RimoChan/i7h).
 
 ### 🔗 kv 的其他作品
 
-- [GTC — 地圖座標轉換](https://gotoc.vercel.app/) · [repo](https://github.com/lp250isme/maps-coords-api)
-- [Indigo — 歌單封面製作](https://playlist-cover-maker.vercel.app/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
+- [GTC — 地圖座標轉換](https://gtc.kvcc.me/) · [repo](https://github.com/lp250isme/maps-coords-api)
+- [Indigo — 歌單封面製作](https://indigo.kvcc.me/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
 
 ### 🙏 致謝
 
