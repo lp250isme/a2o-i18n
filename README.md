@@ -23,7 +23,13 @@ A tiny toy that compresses every word into its numeronym — `first letter + mid
 
 - Vanilla HTML / CSS / JS in a single file
 - Design language shared with [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) (`--lg-*` design tokens, glass materials, iOS semantic colors)
+- "More by kv" cards are rendered from the kit's shared [works registry](https://github.com/lp250isme/liquid-glass-kit/blob/main/src/works.json) at runtime
 - Deployed on Vercel
+
+### 🔗 More by kv
+
+- [GTC — Maps Coordinate Converter](https://gotoc.vercel.app/) · [repo](https://github.com/lp250isme/maps-coords-api)
+- [Indigo — Playlist Cover Maker](https://playlist-cover-maker.vercel.app/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
 
 ### 🙏 Credit
 
@@ -48,7 +54,13 @@ Inspired by [RimoChan/i7h](https://github.com/RimoChan/i7h).
 
 - 單檔 vanilla HTML / CSS / JS
 - 設計語言與 [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) 同源（`--lg-*` design token、玻璃材質、iOS 語意色）
+- 「kv 的其他作品」卡片於 runtime 讀取 kit 的共用[作品註冊表](https://github.com/lp250isme/liquid-glass-kit/blob/main/src/works.json)渲染
 - 部署於 Vercel
+
+### 🔗 kv 的其他作品
+
+- [GTC — 地圖座標轉換](https://gotoc.vercel.app/) · [repo](https://github.com/lp250isme/maps-coords-api)
+- [Indigo — 歌單封面製作](https://playlist-cover-maker.vercel.app/) · [repo](https://github.com/lp250isme/playlist-cover-maker)
 
 ### 🙏 致謝
 
