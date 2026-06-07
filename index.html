@@ -511,6 +511,61 @@
                 color: var(--label-3);
             }
 
+            /* ---------- kv 的其他作品 ---------- */
+            .more-by {
+                margin-top: 28px;
+            }
+            .more-label {
+                margin: 0 4px 8px;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--label-3);
+            }
+            .more-card {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 14px;
+                border-radius: 18px;
+                text-decoration: none;
+                transition: background-color 0.15s ease;
+            }
+            .more-card + .more-card {
+                margin-top: 10px;
+            }
+            .more-card img {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                flex-shrink: 0;
+            }
+            .more-card .more-text {
+                flex: 1;
+                min-width: 0;
+            }
+            .more-card .more-title {
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--label);
+            }
+            .more-card .more-desc {
+                display: block;
+                font-size: 12px;
+                color: var(--label-2);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .more-card svg {
+                width: 16px;
+                height: 16px;
+                color: var(--label-3);
+                flex-shrink: 0;
+            }
+
             /* ---------- footer ---------- */
             footer {
                 margin-top: 36px;
@@ -660,6 +715,11 @@
                 </div>
             </section>
 
+            <!-- kv 的其他作品 — 註冊表在 liquid-glass-kit/src/works.json，runtime 取用 -->
+            <section class="more-by" id="moreBy" hidden>
+                <p class="more-label">kv 的其他作品</p>
+            </section>
+
             <footer class="animate-fade-in">
                 靈感來自
                 <a href="https://github.com/RimoChan/i7h" target="_blank" rel="noopener">RimoChan/i7h</a>
@@ -694,6 +754,11 @@
                         effectiveDark ? '#000000' : '#f2f2f7'
                     );
                     brandIcon.src = effectiveDark ? 'icon-dark.png' : 'icon.png';
+                    document.dispatchEvent(
+                        new CustomEvent('a2o-theme', {
+                            detail: { dark: effectiveDark },
+                        })
+                    );
                 };
 
                 btn.addEventListener('click', () => {
@@ -872,6 +937,96 @@
                 });
 
                 render();
+            })();
+
+            /* ============================================================
+               kv 的其他作品 — 與 GTC/PCM 共用 liquid-glass-kit 的
+               works.json 註冊表（更新一處，所有 app 跟上）
+               ============================================================ */
+            (async function initMoreBy() {
+                const SOURCES = [
+                    'https://cdn.jsdelivr.net/gh/lp250isme/liquid-glass-kit@main/src/works.json',
+                    'https://raw.githubusercontent.com/lp250isme/liquid-glass-kit/main/src/works.json',
+                ];
+                const EXCLUDE = ['a2o']; // 自己不顯示
+                const section = document.getElementById('moreBy');
+
+                const isDark = () => {
+                    const t = document.documentElement.dataset.theme;
+                    if (t) return t === 'dark';
+                    return window.matchMedia('(prefers-color-scheme: dark)')
+                        .matches;
+                };
+
+                let works = null;
+                for (const url of SOURCES) {
+                    try {
+                        const res = await fetch(url);
+                        if (res.ok) {
+                            works = await res.json();
+                            break;
+                        }
+                    } catch {
+                        /* 換下一個來源 */
+                    }
+                }
+                if (!works) return; // 取不到就保持隱藏
+
+                const list = works.filter(w => !EXCLUDE.includes(w.id));
+                if (!list.length) return;
+
+                for (const w of list) {
+                    const a = document.createElement('a');
+                    a.className = 'glass-chip more-card';
+                    a.href = w.url;
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+
+                    const img = document.createElement('img');
+                    img.alt = w.title.zh || w.title.en;
+                    img.dataset.icon = w.icon;
+                    if (w.iconDark) img.dataset.iconDark = w.iconDark;
+                    img.src = isDark() && w.iconDark ? w.iconDark : w.icon;
+
+                    const text = document.createElement('span');
+                    text.className = 'more-text';
+                    const title = document.createElement('span');
+                    title.className = 'more-title';
+                    title.textContent = w.title.zh || w.title.en;
+                    const desc = document.createElement('span');
+                    desc.className = 'more-desc';
+                    desc.textContent = w.desc.zh || w.desc.en;
+                    text.append(title, desc);
+
+                    const arrow = document.createElementNS(
+                        'http://www.w3.org/2000/svg',
+                        'svg'
+                    );
+                    arrow.setAttribute('viewBox', '0 0 24 24');
+                    arrow.setAttribute('fill', 'none');
+                    arrow.setAttribute('stroke', 'currentColor');
+                    arrow.setAttribute('stroke-width', '2');
+                    arrow.setAttribute('stroke-linecap', 'round');
+                    arrow.setAttribute('stroke-linejoin', 'round');
+                    arrow.innerHTML =
+                        '<line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline>';
+
+                    a.append(img, text, arrow);
+                    section.append(a);
+                }
+
+                section.hidden = false;
+                section.classList.add('animate-fade-in');
+
+                // 主題切換時換深淺 icon
+                document.addEventListener('a2o-theme', e => {
+                    section.querySelectorAll('img[data-icon]').forEach(img => {
+                        img.src =
+                            e.detail.dark && img.dataset.iconDark
+                                ? img.dataset.iconDark
+                                : img.dataset.icon;
+                    });
+                });
             })();
         </script>
     </body>
