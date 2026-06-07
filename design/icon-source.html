@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head><style>body{margin:0;display:flex;background:transparent}</style></head>
+<body>
+<!-- LIGHT VARIANT -->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="sqL"><rect x="16" y="16" width="480" height="480" rx="108"/></clipPath>
+    <radialGradient id="bgL1" cx="0.12" cy="0.1" r="0.9">
+      <stop offset="0%" stop-color="hsla(210,100%,86%,0.95)"/><stop offset="100%" stop-color="hsla(210,100%,86%,0)"/>
+    </radialGradient>
+    <radialGradient id="bgL2" cx="0.92" cy="0.15" r="0.8">
+      <stop offset="0%" stop-color="hsla(189,95%,80%,0.8)"/><stop offset="100%" stop-color="hsla(189,95%,80%,0)"/>
+    </radialGradient>
+    <radialGradient id="bgL3" cx="0.5" cy="1.05" r="0.9">
+      <stop offset="0%" stop-color="hsla(252,75%,86%,0.9)"/><stop offset="100%" stop-color="hsla(252,75%,86%,0)"/>
+    </radialGradient>
+    <linearGradient id="capFillL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.60)"/><stop offset="55%" stop-color="rgba(255,255,255,0.20)"/><stop offset="100%" stop-color="rgba(255,255,255,0.34)"/>
+    </linearGradient>
+    <radialGradient id="capBlueL" cx="0.5" cy="0.7" r="0.85">
+      <stop offset="0%" stop-color="rgba(0,122,255,0.30)"/><stop offset="75%" stop-color="rgba(0,122,255,0.08)"/><stop offset="100%" stop-color="rgba(0,122,255,0)"/>
+    </radialGradient>
+    <linearGradient id="rimL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.95)"/><stop offset="50%" stop-color="rgba(255,255,255,0.35)"/><stop offset="100%" stop-color="rgba(255,255,255,0.75)"/>
+    </linearGradient>
+    <linearGradient id="specL" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.95)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="sqRimL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0.3)"/>
+    </linearGradient>
+    <filter id="blurS" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blurM" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <g clip-path="url(#sqL)">
+    <rect x="16" y="16" width="480" height="480" fill="#eef2f8"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgL1)"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgL2)"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgL3)"/>
+    <!-- drop shadow under capsule -->
+    <ellipse cx="256" cy="352" rx="150" ry="20" fill="rgba(30,60,120,0.30)" filter="url(#blurM)"/>
+    <!-- glass capsule -->
+    <g>
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="url(#capFillL)"/>
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="url(#capBlueL)"/>
+      <!-- inner bottom glow -->
+      <path d="M150 318 C 200 332, 312 332, 362 318" stroke="rgba(180,220,255,0.9)" stroke-width="10" fill="none" filter="url(#blurS)"/>
+      <!-- specular sweep -->
+      <ellipse cx="172" cy="206" rx="70" ry="26" fill="url(#specL)" transform="rotate(-10 172 206)" filter="url(#blurS)"/>
+      <circle cx="392" cy="204" r="10" fill="rgba(255,255,255,0.95)" filter="url(#blurS)"/>
+      <!-- rim -->
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="none" stroke="url(#rimL)" stroke-width="3"/>
+      <!-- i18n wordmark -->
+      <text x="256" y="295" text-anchor="middle"
+            font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+            font-size="104" font-weight="800" letter-spacing="-2"
+            fill="rgba(18,32,60,0.88)">i<tspan fill="#007aff">18</tspan>n</text>
+    </g>
+  </g>
+  <rect x="17.5" y="17.5" width="477" height="477" rx="106.5" fill="none" stroke="url(#sqRimL)" stroke-width="3"/>
+</svg>
+
+<!-- DARK VARIANT -->
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="sqD"><rect x="16" y="16" width="480" height="480" rx="108"/></clipPath>
+    <radialGradient id="bgD1" cx="0.12" cy="0.1" r="0.9">
+      <stop offset="0%" stop-color="hsla(222,50%,20%,0.95)"/><stop offset="100%" stop-color="hsla(222,50%,20%,0)"/>
+    </radialGradient>
+    <radialGradient id="bgD2" cx="0.92" cy="0.15" r="0.8">
+      <stop offset="0%" stop-color="hsla(262,45%,24%,0.8)"/><stop offset="100%" stop-color="hsla(262,45%,24%,0)"/>
+    </radialGradient>
+    <radialGradient id="bgD3" cx="0.5" cy="1.05" r="0.9">
+      <stop offset="0%" stop-color="hsla(202,55%,18%,0.8)"/><stop offset="100%" stop-color="hsla(202,55%,18%,0)"/>
+    </radialGradient>
+    <linearGradient id="capFillD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.32)"/><stop offset="55%" stop-color="rgba(255,255,255,0.08)"/><stop offset="100%" stop-color="rgba(255,255,255,0.16)"/>
+    </linearGradient>
+    <radialGradient id="capBlueD" cx="0.5" cy="0.7" r="0.85">
+      <stop offset="0%" stop-color="rgba(10,132,255,0.34)"/><stop offset="75%" stop-color="rgba(10,132,255,0.08)"/><stop offset="100%" stop-color="rgba(10,132,255,0)"/>
+    </radialGradient>
+    <linearGradient id="rimD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="50%" stop-color="rgba(255,255,255,0.18)"/><stop offset="100%" stop-color="rgba(255,255,255,0.5)"/>
+    </linearGradient>
+    <linearGradient id="specD" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.8)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <linearGradient id="sqRimD" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/><stop offset="100%" stop-color="rgba(255,255,255,0.08)"/>
+    </linearGradient>
+    <filter id="blurS2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="blurM2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <g clip-path="url(#sqD)">
+    <rect x="16" y="16" width="480" height="480" fill="#05060a"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgD1)"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgD2)"/>
+    <rect x="16" y="16" width="480" height="480" fill="url(#bgD3)"/>
+    <ellipse cx="256" cy="352" rx="150" ry="20" fill="rgba(0,0,0,0.6)" filter="url(#blurM2)"/>
+    <g>
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="url(#capFillD)"/>
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="url(#capBlueD)"/>
+      <path d="M150 318 C 200 332, 312 332, 362 318" stroke="rgba(120,180,255,0.7)" stroke-width="10" fill="none" filter="url(#blurS2)"/>
+      <ellipse cx="172" cy="206" rx="70" ry="26" fill="url(#specD)" transform="rotate(-10 172 206)" filter="url(#blurS2)"/>
+      <circle cx="392" cy="204" r="10" fill="rgba(255,255,255,0.8)" filter="url(#blurS2)"/>
+      <rect x="86" y="180" width="340" height="152" rx="76" fill="none" stroke="url(#rimD)" stroke-width="3"/>
+      <text x="256" y="295" text-anchor="middle"
+            font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif"
+            font-size="104" font-weight="800" letter-spacing="-2"
+            fill="rgba(255,255,255,0.92)">i<tspan fill="#5eb1ff">18</tspan>n</text>
+    </g>
+  </g>
+  <rect x="17.5" y="17.5" width="477" height="477" rx="106.5" fill="none" stroke="url(#sqRimD)" stroke-width="3"/>
+</svg>
+</body>
+</html>

@@ -10,8 +10,10 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <title>i18n 縮寫產生器</title>
 
-        <link rel="icon" href="favicon.ico" sizes="16x16" />
-        <link rel="icon" href="icon-32x32.png" sizes="32x32" />
+        <link rel="icon" href="favicon.ico" sizes="48x48" />
+        <link rel="icon" type="image/png" href="icon.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" type="image/png" href="icon-dark.png" media="(prefers-color-scheme: dark)" />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
         <style>
             /* ============================================================
@@ -556,7 +558,7 @@
     <body>
         <main class="page">
             <header class="topbar animate-fade-in">
-                <img src="icon-32x32.png" alt="a2o-i18n" />
+                <img id="brandIcon" src="icon.png" alt="a2o-i18n" />
                 <button
                     id="themeBtn"
                     class="glass icon-btn"
@@ -673,6 +675,7 @@
             (function initTheme() {
                 const KEY = 'a2o-theme';
                 const btn = document.getElementById('themeBtn');
+                const brandIcon = document.getElementById('brandIcon');
                 const meta = document.querySelector('meta[name="theme-color"]');
                 const mq = window.matchMedia('(prefers-color-scheme: dark)');
                 let mode = localStorage.getItem(KEY) || 'auto';
@@ -690,6 +693,7 @@
                         'content',
                         effectiveDark ? '#000000' : '#f2f2f7'
                     );
+                    brandIcon.src = effectiveDark ? 'icon-dark.png' : 'icon.png';
                 };
 
                 btn.addEventListener('click', () => {
