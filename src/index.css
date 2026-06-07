@@ -1,0 +1,379 @@
+/* ============================================================
+   a2o-i18n — app 層樣式
+   玻璃材質（.glass / .glass-panel / .glass-chip / .liquid-glass）
+   來自 liquid-glass-kit；互推卡片樣式來自 more-by-kv。
+   主題：useTheme 把解析後的 light/dark 寫到 <html data-theme>，
+   kit 的深色 token 因此自動啟動，這裡只管 app 自己的 token。
+   ============================================================ */
+
+/* ---------- design tokens ---------- */
+:root {
+    --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "SF Pro Display", "Segoe UI", system-ui, Roboto, "Helvetica Neue",
+        Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+        monospace;
+
+    --label: #000000;
+    --label-2: rgba(60, 60, 67, 0.6);
+    --label-3: rgba(60, 60, 67, 0.3);
+
+    --bg: #f2f2f7;
+    --tint: #007aff;
+    --green: #34c759;
+    --fill: rgba(118, 118, 128, 0.12);
+
+    /* GTC mesh gradient 背景 */
+    --mesh: radial-gradient(
+            at 0% 0%,
+            hsla(210, 100%, 90%, 0.8) 0,
+            transparent 50%
+        ),
+        radial-gradient(at 100% 0%, hsla(189, 95%, 85%, 0.5) 0, transparent 50%),
+        radial-gradient(at 50% 100%, hsla(252, 75%, 90%, 0.6) 0, transparent 50%);
+
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    --label: #ffffff;
+    --label-2: rgba(235, 235, 245, 0.6);
+    --label-3: rgba(235, 235, 245, 0.3);
+
+    --bg: #000000;
+    --tint: #0a84ff;
+    --green: #30d158;
+    --fill: rgba(118, 118, 128, 0.24);
+
+    --mesh: radial-gradient(
+            at 0% 0%,
+            hsla(220, 40%, 20%, 0.8) 0,
+            transparent 60%
+        ),
+        radial-gradient(at 100% 0%, hsla(260, 40%, 25%, 0.6) 0, transparent 50%),
+        radial-gradient(at 50% 100%, hsla(200, 40%, 20%, 0.4) 0, transparent 50%);
+
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family: var(--font-ui);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: var(--label);
+    overscroll-behavior: none;
+
+    /* 動態 mesh gradient（GTC 同款） */
+    background-color: var(--bg);
+    background-image: var(--mesh);
+    background-size: 150% 150%;
+    background-attachment: fixed;
+    animation: gradientBG 20s ease infinite alternate;
+    padding-bottom: env(safe-area-inset-bottom);
+    transition: background-color 0.3s ease;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* ---------- 版面 ---------- */
+.page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 20px 20px 40px;
+    padding-top: calc(20px + env(safe-area-inset-top));
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+.topbar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 9999px;
+    padding: 0;
+    color: var(--label);
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.icon-btn:active {
+    transform: scale(0.92);
+}
+.icon-btn svg {
+    width: 19px;
+    height: 19px;
+}
+
+/* ---------- hero ---------- */
+.hero h1 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+.hero p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--label-2);
+}
+
+/* i18n 拆解示意：I·nternationalizatio·n → I18n */
+.demo-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+.demo-strip .word b {
+    color: var(--tint);
+    font-weight: 700;
+}
+.demo-strip .word .mid {
+    color: var(--label-3);
+    text-decoration: underline dotted var(--label-3);
+    text-underline-offset: 3px;
+}
+.demo-strip .arrow {
+    color: var(--label-3);
+    flex-shrink: 0;
+}
+.demo-strip .badge {
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--tint) 14%, transparent);
+    color: var(--tint);
+    font-weight: 700;
+}
+
+/* ---------- 輸入卡（kit 的 LiquidGlass host） ---------- */
+.card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.input-card {
+    overflow: hidden;
+}
+.input-card:focus-within {
+    outline: 2px solid color-mix(in srgb, var(--tint) 45%, transparent);
+    outline-offset: 2px;
+}
+.input-card textarea {
+    display: block;
+    width: 100%;
+    min-height: 116px;
+    padding: 18px 52px 14px 20px;
+    border: none;
+    outline: none;
+    background: transparent;
+    resize: none;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--label);
+}
+.input-card textarea::placeholder {
+    color: var(--label-3);
+}
+
+/* 清除鈕：有字才出現（GTC 輸入框同款） */
+.clear-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 9999px;
+    padding: 0;
+    background: var(--fill);
+    color: var(--label-2);
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.5);
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease,
+        background-color 0.15s ease;
+}
+.input-card.has-text .clear-btn {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+.clear-btn svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* ---------- 範例 chips ---------- */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.chip {
+    border: none;
+    border-radius: 9999px;
+    min-height: 36px;
+    padding: 0 15px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--label-2);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+.chip:active {
+    color: var(--label);
+}
+
+/* ---------- 輸出卡 ---------- */
+.output-card {
+    border-radius: 28px;
+    padding: 16px 20px 18px;
+}
+.output-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.output-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--label-2);
+}
+
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    border-radius: 9999px;
+    min-height: 30px;
+    padding: 0 13px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--tint);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease,
+        transform 0.15s ease;
+}
+.copy-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+.copy-btn:not(:disabled):active {
+    transform: scale(0.95);
+}
+.copy-btn svg {
+    width: 13px;
+    height: 13px;
+}
+/* 複製成功 → 綠色打勾（GTC 轉換鈕同款回饋） */
+.copy-btn.copied {
+    background: var(--green);
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.output-body {
+    min-height: 52px;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+.output-body.empty {
+    color: var(--label-3);
+}
+
+/* ---------- 其他作品 / footer ---------- */
+.more-by {
+    margin-top: 28px;
+}
+
+footer {
+    margin-top: 36px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--label-3);
+}
+footer a {
+    color: var(--label-2);
+    text-decoration: none;
+}
+footer a:hover {
+    color: var(--tint);
+}
+
+/* ---------- 進場動畫 ---------- */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* 不用 fill/delay：動畫沒跑（背景分頁）時內容仍可見 */
+.animate-fade-in {
+    animation: fade-in 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        animation: none;
+    }
+    .animate-fade-in {
+        animation: none;
+    }
+    * {
+        transition-duration: 0.01ms !important;
+    }
+}

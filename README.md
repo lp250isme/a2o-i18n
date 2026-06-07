@@ -17,13 +17,12 @@ A tiny toy that compresses every word into its numeronym — `first letter + mid
 - **Sample Chips**: Tap a sample sentence to try it instantly.
 - **Liquid Glass UI**: Apple-style refractive glass (SVG `feDisplacementMap` + RGB chromatic aberration, after [jh3y's technique](https://codepen.io/jh3y/pen/EajLxJV)) on Chromium, frosted-blur fallback on Safari/Firefox.
 - **Light / Dark / Auto Theme**: Follows the system by default; manual override is remembered in `localStorage`.
-- **Zero Build**: One static `index.html` — vanilla HTML/CSS/JS, no dependencies, no build step.
 
 ### 🛠 Tech
 
-- Vanilla HTML / CSS / JS in a single file
-- Design language shared with [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) (`--lg-*` design tokens, glass materials, iOS semantic colors)
-- "More by kv" cards are rendered from the kit's shared [works registry](https://github.com/lp250isme/liquid-glass-kit/blob/main/src/works.json) at runtime
+- React 18 + Vite
+- [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) — `<LiquidGlass>` refraction + frosted glass materials (`--lg-*` design tokens, iOS semantic colors)
+- [more-by-kv](https://github.com/lp250isme/more-by-kv) — centralized cross-promo registry + `<MoreByKv>` card list
 - Deployed on Vercel
 
 ### 🔗 More by kv
@@ -48,13 +47,12 @@ Inspired by [RimoChan/i7h](https://github.com/RimoChan/i7h).
 - **範例 chips**：點一下範例句立即試玩。
 - **Liquid Glass UI**：Apple 風折射玻璃（SVG `feDisplacementMap` 位移貼圖 + RGB 色散，採用 [jh3y 的技法](https://codepen.io/jh3y/pen/EajLxJV)），Chromium 限定，Safari/Firefox 自動退回霜化模糊玻璃。
 - **淺色 / 深色 / 自動主題**：預設跟隨系統，手動切換會記在 `localStorage`。
-- **零建置**：單一靜態 `index.html`——純 HTML/CSS/JS，無相依套件、無 build step。
 
 ### 🛠 技術
 
-- 單檔 vanilla HTML / CSS / JS
-- 設計語言與 [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) 同源（`--lg-*` design token、玻璃材質、iOS 語意色）
-- 「kv 的其他作品」卡片於 runtime 讀取 kit 的共用[作品註冊表](https://github.com/lp250isme/liquid-glass-kit/blob/main/src/works.json)渲染
+- React 18 + Vite
+- [liquid-glass-kit](https://github.com/lp250isme/liquid-glass-kit) —— `<LiquidGlass>` 折射玻璃 + 霜化玻璃材質（`--lg-*` design token、iOS 語意色）
+- [more-by-kv](https://github.com/lp250isme/more-by-kv) —— 集中管理的跨作品註冊表 + `<MoreByKv>` 卡片元件
 - 部署於 Vercel
 
 ### 🔗 kv 的其他作品
