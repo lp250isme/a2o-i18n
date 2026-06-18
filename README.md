@@ -1,4 +1,6 @@
-# a2o-i18n — i18n 縮寫產生器
+<p align="center">
+  <img src="public/icon-dark.png" alt="a2o-i18n" width="120" height="120">
+</p># a2o-i18n — i18n 縮寫產生器
 
 [English](#english) | [繁體中文](#繁體中文)
 
