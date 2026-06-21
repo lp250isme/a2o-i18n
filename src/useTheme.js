@@ -21,7 +21,7 @@ export default function useTheme() {
             document.documentElement.dataset.theme = t;
             document
                 .querySelector('meta[name="theme-color"]')
-                ?.setAttribute('content', t === 'dark' ? '#000000' : '#f2f2f7');
+                ?.setAttribute('content', t === 'dark' ? '#08090a' : '#fbfbfc');
         };
         apply();
         mq.addEventListener('change', apply);

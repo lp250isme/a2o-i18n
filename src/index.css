@@ -14,46 +14,49 @@
         Consolas, monospace;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
-    --label: #000000;
-    --label-2: rgba(60, 60, 67, 0.6);
-    --label-3: rgba(60, 60, 67, 0.3);
+    /* Linear 配色（工具家族；權威來源 tw-live/DESIGN.md）*/
+    --label: #1c1d21;
+    --label-2: #6b7280;
+    --label-3: rgba(28, 29, 33, 0.34);
 
-    --bg: #f2f2f7;
-    --tint: #007aff;
-    --green: #34c759;
-    --fill: rgba(118, 118, 128, 0.12);
+    --bg: #fbfbfc;
+    --tint: #5e6ad2;
+    --green: #46a758;
+    --fill: rgba(28, 29, 33, 0.05);
 
-    /* GTC mesh gradient 背景 */
-    --mesh: radial-gradient(
-            at 0% 0%,
-            hsla(210, 100%, 90%, 0.8) 0,
-            transparent 50%
-        ),
-        radial-gradient(at 100% 0%, hsla(189, 95%, 85%, 0.5) 0, transparent 50%),
-        radial-gradient(at 50% 100%, hsla(252, 75%, 90%, 0.6) 0, transparent 50%);
+    /* 背景：flat + 頂部極淡 accent glow（取代彩色 mesh）*/
+    --glow: radial-gradient(
+        120% 80% at 50% -12%,
+        color-mix(in srgb, var(--tint) 7%, transparent),
+        transparent 58%
+    );
 
     color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-    --label: #ffffff;
-    --label-2: rgba(235, 235, 245, 0.6);
-    --label-3: rgba(235, 235, 245, 0.3);
+    --label: #eceef1;
+    --label-2: #8a8f98;
+    --label-3: #62666d;
 
-    --bg: #000000;
-    --tint: #0a84ff;
-    --green: #30d158;
-    --fill: rgba(118, 118, 128, 0.24);
+    --bg: #08090a;
+    --tint: #7c7dff;
+    --green: #4cc76a;
+    --fill: rgba(255, 255, 255, 0.06);
 
-    --mesh: radial-gradient(
-            at 0% 0%,
-            hsla(220, 40%, 20%, 0.8) 0,
-            transparent 60%
-        ),
-        radial-gradient(at 100% 0%, hsla(260, 40%, 25%, 0.6) 0, transparent 50%),
-        radial-gradient(at 50% 100%, hsla(200, 40%, 20%, 0.4) 0, transparent 50%);
+    --glow: radial-gradient(
+        120% 80% at 50% -12%,
+        color-mix(in srgb, var(--tint) 10%, transparent),
+        transparent 58%
+    );
 
     color-scheme: dark;
+}
+
+/* kit 強調色（slider fill / focus ring / toggle / segment）跟著 app tint，
+   否則殘留 kit 預設 iOS 藍。memory: kv-linear-palette-tool-family */
+:root:root {
+    --lg-tint: var(--tint);
 }
 
 * {
@@ -73,23 +76,13 @@ body {
     color: var(--label);
     overscroll-behavior: none;
 
-    /* 動態 mesh gradient（GTC 同款） */
+    /* flat 背景 + 頂部極淡 accent glow（Linear 風，無動態背景） */
     background-color: var(--bg);
-    background-image: var(--mesh);
-    background-size: 150% 150%;
+    background-image: var(--glow);
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    animation: gradientBG 20s ease infinite alternate;
     padding-bottom: env(safe-area-inset-bottom);
     transition: background-color 0.3s ease;
-}
-
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%;
-    }
 }
 
 /* ---------- 版面 ---------- */
@@ -417,9 +410,6 @@ input[type="radio"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    body {
-        animation: none;
-    }
     .animate-fade-in {
         animation-name: fade-in-opacity;
     }
