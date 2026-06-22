@@ -183,6 +183,9 @@ export default function App() {
                 <a href="https://github.com/lp250isme/a2o-i18n" target="_blank" rel="noopener noreferrer">
                     GitHub
                 </a>
+                <div style={{ marginTop: 6, fontSize: 11, color: 'var(--label-3)' }}>
+                    a2o {typeof __GIT_SHA__ !== 'undefined' ? __GIT_SHA__ : 'dev'}
+                </div>
             </footer>
         </main>
     );
