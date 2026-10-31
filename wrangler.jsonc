@@ -6,6 +6,8 @@
   "name": "a2o",
   "compatibility_date": "2026-10-30",
   "workers_dev": true,
+  // CUTOVER: uncomment after deleting the old Vercel DNS record for this host
+  // "routes": [{ "pattern": "a2o.kvcc.me", "custom_domain": true }],
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
