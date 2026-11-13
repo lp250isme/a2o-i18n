@@ -235,6 +235,13 @@ body {
     transform: scale(1);
     pointer-events: auto;
 }
+/* 視覺維持 26px，但用透明熱區撐到 44×44（Apple HIG / Material 最小觸控目標）。
+   top/right 各留 12px > 9px 外擴，熱區不會溢出卡片。 */
+.clear-btn::before {
+    content: "";
+    position: absolute;
+    inset: -9px; /* 26 + 9*2 = 44。方形熱區，圓形會漏掉四角 */
+}
 .clear-btn svg {
     width: 13px;
     height: 13px;
