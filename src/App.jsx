@@ -142,7 +142,9 @@ export default function App() {
 
                 <div className="glass-panel output-card animate-fade-in">
                     <div className="output-head">
-                        <span className="output-label">轉換結果</span>
+                        <span className="output-label" id="output-label">
+                            轉換結果
+                        </span>
                         <button
                             className={`glass-chip copy-btn ${copied ? 'copied' : ''}`}
                             onClick={copy}
@@ -161,7 +163,15 @@ export default function App() {
                             <span>{copied ? '已複製' : '複製'}</span>
                         </button>
                     </div>
-                    <div className={`output-body ${text ? '' : 'empty'}`}>
+                    {/* 結果即時變動 → live region，螢幕閱讀器才會念出轉換後的字串。
+                        polite：等使用者停下來才播報，不打斷打字。 */}
+                    <div
+                        className={`output-body ${text ? '' : 'empty'}`}
+                        role="status"
+                        aria-live="polite"
+                        aria-atomic="true"
+                        aria-labelledby="output-label"
+                    >
                         {text ? result : PLACEHOLDER}
                     </div>
                 </div>
