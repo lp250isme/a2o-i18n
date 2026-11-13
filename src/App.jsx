@@ -36,10 +36,39 @@ function ThemeIcon({ pref }) {
     );
 }
 
+const COPY_LABEL = { idle: '複製', ok: '已複製', fail: '複製失敗' };
+
+/** 複製鈕 icon 三態：剪貼簿／勾勾（成功）／警示三角（失敗）。
+ *  失敗同時換 icon 與文案，不靠顏色單獨表意（WCAG 1.4.1）。 */
+function CopyIcon({ state }) {
+    if (state === 'ok') {
+        return (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+            </svg>
+        );
+    }
+    if (state === 'fail') {
+        return (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+        );
+    }
+    return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+    );
+}
+
 export default function App() {
     const { pref, theme, cycle } = useTheme();
     const [text, setText] = useState('');
-    const [copied, setCopied] = useState(false);
+    const [copyState, setCopyState] = useState('idle'); // 'idle' | 'ok' | 'fail'
     const inputRef = useRef(null);
     const copiedTimer = useRef(null);
 
@@ -50,16 +79,22 @@ export default function App() {
         inputRef.current?.focus();
     };
 
+    // 剪貼簿可能因 http 非安全來源、權限被拒或舊瀏覽器而失敗 →
+    // 一定要給看得到的回饋（不要靜默失敗），並指出手動複製的替代路徑。
     const copy = async () => {
         if (!text) return;
+        let state = 'ok';
         try {
             await navigator.clipboard.writeText(result);
         } catch {
-            return; // 剪貼簿不可用時靜默失敗
+            state = 'fail';
         }
-        setCopied(true);
+        setCopyState(state);
         clearTimeout(copiedTimer.current);
-        copiedTimer.current = setTimeout(() => setCopied(false), 1600);
+        copiedTimer.current = setTimeout(
+            () => setCopyState('idle'),
+            state === 'ok' ? 1600 : 4000
+        );
     };
 
     return (
@@ -146,21 +181,15 @@ export default function App() {
                             轉換結果
                         </span>
                         <button
-                            className={`glass-chip copy-btn ${copied ? 'copied' : ''}`}
+                            type="button"
+                            className={`glass-chip copy-btn ${
+                                copyState === 'ok' ? 'copied' : ''
+                            } ${copyState === 'fail' ? 'failed' : ''}`}
                             onClick={copy}
                             disabled={!text}
                         >
-                            {copied ? (
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12" />
-                                </svg>
-                            ) : (
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                </svg>
-                            )}
-                            <span>{copied ? '已複製' : '複製'}</span>
+                            <CopyIcon state={copyState} />
+                            <span>{COPY_LABEL[copyState]}</span>
                         </button>
                     </div>
                     {/* 結果即時變動 → live region，螢幕閱讀器才會念出轉換後的字串。
@@ -174,6 +203,11 @@ export default function App() {
                     >
                         {text ? result : PLACEHOLDER}
                     </div>
+                    {copyState === 'fail' && (
+                        <p className="copy-error animate-fade-in" role="alert">
+                            無法存取剪貼簿（可能是瀏覽器權限或非安全連線），請手動選取上方文字複製。
+                        </p>
+                    )}
                 </div>
             </section>
 

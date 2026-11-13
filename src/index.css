@@ -22,6 +22,7 @@
     --bg: #fbfbfc;
     --tint: #5e6ad2;
     --green: #46a758;
+    --red: #d92d20;
     --fill: rgba(28, 29, 33, 0.05);
 
     /* 背景：flat + 頂部極淡 accent glow（取代彩色 mesh）*/
@@ -42,6 +43,7 @@
     --bg: #08090a;
     --tint: #7c7dff;
     --green: #4cc76a;
+    --red: #ff6166; /* 暗色提亮一階，維持 4.5:1 */
     --fill: rgba(255, 255, 255, 0.06);
 
     --glow: radial-gradient(
@@ -320,6 +322,11 @@ body {
     box-shadow: none;
 }
 
+/* 複製失敗 → 紅字＋警示三角（不靠顏色單獨表意） */
+.copy-btn.failed {
+    color: var(--red);
+}
+
 .output-body {
     min-height: 52px;
     font-size: 16px;
@@ -329,6 +336,14 @@ body {
 }
 .output-body.empty {
     color: var(--label-3);
+}
+
+/* 剪貼簿失敗的行內說明：講清原因＋手動複製的替代路徑 */
+.copy-error {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--red);
 }
 
 /* ---------- 其他作品 / footer ---------- */
